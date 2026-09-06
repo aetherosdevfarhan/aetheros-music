@@ -31,3 +31,8 @@ if (!token) {
   console.error('[AETHEROS MUSIC] DISCORD_TOKEN is missing from .env — the bot cannot start.');
   process.exit(1);
 }
+if (!process.env.CLIENT_ID) {
+  console.warn('[AETHEROS MUSIC] CLIENT_ID is missing from .env — slash command deployment (npm run deploy) will fail.');
+}
+
+client.login(token);
