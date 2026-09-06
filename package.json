@@ -1,10 +1,11 @@
 {
   "name": "aetheros-music",
   "version": "1.0.0",
-  "description": "AETHEROS MUSIC Discord bot",
+  "description": "AETHEROS MUSIC",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "deploy": "node src/deploy-commands.js"
   },
   "dependencies": {
     "discord.js": "^14.14.1",
