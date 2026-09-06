@@ -1,7 +1,8 @@
+
 {
   "name": "aetheros-music",
   "version": "1.0.0",
-  "description": "AETHEROS MUSIC",
+  "description": "AETHEROS MUSIC Discord bot",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -12,7 +13,6 @@
     "dotenv": "^16.4.5",
     "@discordjs/voice": "^0.16.1",
     "opusscript": "^0.1.1",
-    "ffmpeg-static": "^5.2.0",
     "libsodium-wrappers": "^0.7.13",
     "play-dl": "^1.9.7"
   },
