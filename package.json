@@ -1,23 +1,28 @@
-{
-  "name": "aetheros-music",
-  "version": "2.0.0",
-  "description": "AETHEROS MUSIC- A part of aetherosownz",
-  "main": "src/index.js",
-  "type": "commonjs",
-  "scripts": {
-    "start": "node src/index.js",
-    "deploy": "node src/deploy-commands.js"
-  },
-  "dependencies": {
-    "discord.js": "^14.15.3",
-    "dotenv": "^16.4.5",
-    "@discordjs/voice": "^0.17.0",
-    "play-dl": "^1.9.7",
-    "opusscript": "^0.0.8",
-    "libsodium-wrappers": "^0.7.13",
-    "ffmpeg-static": "^5.2.0"
-  },
-  "engines": {
-    "node": ">=18.17.0"
-  }
-}
+require('dotenv').config();
+const http = require('node:http');
+const { Client, GatewayIntentBits } = require('discord.js');
+const { loadCommands } = require('./handlers/commandHandler');
+const { loadEvents } = require('./handlers/eventHandler');
+
+// Dummy HTTP server so free-tier hosts (Render, etc.) that require a bound port for health
+// checks don't kill the process. Harmless if your host doesn't need it.
+const port = process.env.PORT || 3000;
+http.createServer((req, res) => res.end('AETHEROS MUSIC is running.')).listen(port, () => {
+  console.log(`[AETHEROS MUSIC] Health check server listening on port ${port}`);
+});
+
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildVoiceStates
+  ]
+});
+
+loadCommands(client);
+loadEvents(client);
+
+const token = process.env.DISCORD_TOKEN;
+console.log(`[DEBUG] Token exists: ${!!token}`);
+console.log(`[DEBUG] Token length: ${token ? token.length : 0}`);
